@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body>
+
+{% block content %}
+
+
+<div class="container text-center" >
+    <form  method="POST" action="" class="form-group">
+
+
+            <input  type="number" name="amount" placeholder="amount">
+
+         <select  name="choice" >
+             <option value="none">None</option>
+            <option value="deposit">Deposit</option>
+            <option value="withdraw">Withdraw</option>
+             <option value="clear">Clear</option>
+
+        </select>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+
+
+
+<div class="container text-center">
+
+  {% for user in saveinfo %}
+
+    Total Amount: <strong> {{ "$%.2f"|format(user['amount']|float) }} </strong> in My Account
+
+{% endfor %}
+
+</div>
+</div>
+{% endblock %}
+
+</body>
+</html>

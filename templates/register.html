@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends "base.html" %}
+<head>
+
+    <meta charset="UTF-8">
+    <title>Stock Market</title>
+</head>
+<body>
+{% block content %}
+
+
+<div class="container text-center">
+
+<form  action="{{ url_for('register') }}" method="POST">
+    <div class="form-group">
+
+
+   <!--<p> <input class="form-control" type="text" name="username" placeholder="User Name" > </p>-->
+    <p> <input class="form-control" type="text" name="firstname" placeholder="First Name"> </p>
+    <p> <input class="form-control" type="text" name="lastname" placeholder="Last Name"> </p>
+    <p> <input class="form-control" type="email" name="email" placeholder="Email"> </p>
+    <p> <input class="form-control" type="password" name="password" placeholder="password"> </p>
+
+    <p><button class="btn btn-success" type="submit">Register</button></p>
+
+        </div>
+</form>
+    <div class="container text-center" style="border: 1px">
+
+    {% for message in get_flashed_messages() %}
+
+    <strong>{{ message }} </strong>
+
+    {% endfor %}
+</div>
+</div>
+
+
+
+
+
+{% endblock %}
+</body>
+</html>

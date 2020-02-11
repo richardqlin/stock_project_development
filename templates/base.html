@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Market</title>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" >
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+  {{ moment.include_jquery() }}
+{{ moment.include_moment() }}
+
+</head>
+<body>
+
+<div class="navbar navbar-expand"  style=" background-image: linear-gradient(to right, yellow,red)">
+
+    <a class="nav-link" href="/">Register or No Account</a>
+
+<a class="nav-link" href="/login">Login</a>
+
+{% if session['user-info'] is defined %}
+<a class="nav-link" href="/account">Account Balance</a>
+    <a class="nav-link" href="/stock">Trade My Stock</a>
+     <a class="nav-link" href="/checkout">Check Symbol</a>
+    {% endif %}
+<a class="nav-link" href="/logout">Logout</a>
+
+</div>
+
+<div id="content" style="background-image: linear-gradient(to right,  orange, gold)" >
+
+	{% block content %} {% endblock %}
+
+</div>
+
+<div class="jumbotron text-center" style="background-image: linear-gradient(to right,  red,yellow)">
+
+    <div class="container text-right" style="border: 1px">
+
+
+        {% if session['user-info'] is defined %}
+                   <h3> Welcome {{ session['user-info']['firstname']|capitalize}}'s Stock Portfolio  </h3>
+
+            <strong> Login time: {{ moment(session['user-info']['loginTime']).format('LLLL') }}</strong> <br>
+
+
+        <strong style="white-space:pre">Dow Jones: {{ session['user-info']['dow']}} Nasdaq: {{ session['user-info']['nas']}} </strong> <br>
+        <strong >City: {{  session['user-info']['city']}}   Current Temperature: {{ session['user-info']['temp']}} degrees. Humidity:  {{ session['user-info']['hum']}}, Weather:  {{ session['user-info']['weather']}}
+
+        </strong><br>
+             <button> <a href = '/logout'>Not {{session['user-info']['email']}} ?</a> </button>
+        {% else %}
+            <h3>My Stock Portfolio </h3>
+        {% endif %}
+    </div>
+    </div>
+</body>
+</html>

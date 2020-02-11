@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Market</title>
+
+</head>
+<body>
+
+{% block content %}
+
+
+
+
+<div clas="container next-center">
+
+    {% for amount in info %}
+
+    <h5>Total Amount: {{ "$%.2f"|format(amount['amount']|float) }} in My Account</h5>
+
+    {% endfor %}
+</div>
+  <div class="container text-left">
+    <form method="post" >
+        <input type="number" name="share" placeholder="share">
+        <input type="text" name="tick", placeholder="symbol">
+
+        <select name="action" >
+            <option value="none">None</option>
+            <option value="buy">Buy</option>
+            <option value="sell">Sell</option>
+        </select>
+        <input type="submit" value="Submit" >
+    </form>
+
+  </div>
+
+      <div class="container text-left">
+
+          <table border="1">
+              <thead align="center"><h5>My Stock Portfolio</h5> </thead>
+
+              <tr>
+                   <td><strong >Current Time</strong></td>
+                  <td><strong >Time from Now</strong></td>
+                  <td> <strong >Ticker</strong></td>
+                  <td><strong >Share </strong></td>
+                  <td><strong>Unit Price</strong></td>
+                  <td><strong >Total Price</strong></td>
+                  <td><strong></strong></td>
+
+              </tr>
+      {% for e in entries | reverse %}
+
+              <tr>
+                   <td> <strong >  {{ moment(e['time']).format('LLL') }} </strong></td>
+                  <td><strong >{{ moment(e['time']).fromNow() }}</strong></td>
+                  <td><strong >{{ e['tick'] | upper}}</strong> </td>
+                  <td> <strong >{{ e['share'] }} </strong></td>
+                  <td><strong>{{ e['price'] }}</strong></td>
+                  <td> <strong >{{ e['total'] }} </strong></td>
+              </tr>
+{% endfor %}
+    <tr >
+        <td colspan="6" align="right"><strong>{{ total }}</strong> </td>
+    </tr>
+</table>
+          </div>
+
+<div class="container">
+
+    {% for message in get_flashed_messages() %}
+
+    <strong>{{ message }} </strong>
+
+    {% endfor %}
+</div>
+
+  </div>
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Market</title>
+
+</head>
+<body>
+
+{% block content %}
+
+
+
+
+<div class="container next-center">
+
+    {% for amount in info %}
+
+    <h5>Total Amount: {{ "$%.2f"|format(amount['amount']|float) }} in My Account</h5>
+
+    {% endfor %}
+</div>
+  <div class="container text-left">
+    <form method="post" >
+        <input type="number" name="share" placeholder="share">
+        <input type="text" name="tick", placeholder="symbol">
+        <input type="submit" value="Submit" >
+    </form>
+      <br>
+  </div>
+
+      <div class="container text-left">
+
+    <strong>Stock Symbol:   {{ entries['tick']|upper }}
+     Share :     {{ entries['share'] }}
+
+     Price:     {{ entries['price'] }}
+     Total:     {{ entries['total'] }}
+    {% if entries['diff'] is defined %}
+     {% if  entries['diff']|abs  %}
+        <strong style="color:red"   >Capital loss: {{  "$%.2f"|format(-entries['diff']) }} </strong>
+        {% else %}
+        <strong style="color:green"   >Gapital Gain: {{  "$%.2f"|format(-entries['diff']) }} </strong>
+
+        {% endif %}
+{% endif %}
+    </strong>
+<div class="container">
+
+    {% for message in get_flashed_messages() %}
+
+    <strong>{{ message }} </strong>
+
+    {% endfor %}
+</div>
+
+      </div>
+
+
+
+{% endblock %}
+
+</body>
+</html>
